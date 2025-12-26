@@ -25,6 +25,21 @@
                 
                 '''
 }
+              stage('Deploy Docker on EC2') {
+                agent { label 'ec2' }
+            steps {
+              sh '''
+                  docker pull sanketfulpagare2/helloapp:latest || true
+
+                  docker rm -f helloapp || true
+
+                  docker run -d \
+                    --name helloapp \
+                    -p 8000:5000 \
+                    sanketfulpagare2/helloapp:latest
+                '''
+            }
+        }
                
             }
         }
