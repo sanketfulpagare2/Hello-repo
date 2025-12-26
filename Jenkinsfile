@@ -19,7 +19,9 @@
              withCredentials([string(credentialsId: 'dockerKey', variable: 'dockerKey')]) {
                sh '''
                 docker login -u sanketfulpagare2 -p ${dockerKey}
-                
+                docker tag helloapp sanketfulpagare2/helloapp:latest
+                docker push sanketfulpagare2/helloapp:latest
+                docker logout
                 
                 '''
 }
