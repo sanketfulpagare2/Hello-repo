@@ -16,10 +16,14 @@
 
         stage('Run Container') {
             steps {
-                sh '''
-                docker rm -f helloapp || true
-                docker run -d -p 8000:8000 --name helloapp helloapp
+             withCredentials([string(credentialsId: 'dockerKey', variable: 'dockerKey')]) {
+               sh '''
+                docker login -u sanketfulpagare2 -p ${dockerKey}
+                
+                
                 '''
+}
+               
             }
         }
     }
